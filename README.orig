@@ -1,0 +1,12 @@
+The "HTML Source Explorer" plugin is meant to aid on the html source exploring.
+It allows you to follow links by opening them on a new buffer on vim (the same
+way you can follow links on Mozilla Firefox/Chrome view source).
+
+By using <leader>fl inside "", '' or (), if it is a link (absolute, or
+relative) the file will be open. 
+
+It works both on http:// urls and local files.
+
+This plugin also includes a |:Wget| command which allows you to open a copy of
+a remote file for editing in vim
+

@@ -1,0 +1,142 @@
+*html-source-explorer.txt*	Plugin for browsing HTML source code files
+
+Author: Bruno Silva  (b DOT silva AT live DOT com)
+For Vim version 6.0 and above
+Last change: 2011 October 31
+
+1. Overview 					|html-source-explorer-intro|
+2. html-source-explorer on the internet			|html-source-explorer-internet|
+3. Requirements					|html-source-explorer-requirements|
+4. Installation 				|html-source-explorer-install|
+5. Usage 					|html-source-explorer-using|
+6. Options 					|html-source-explorer-options|
+7. Commands 					|html-source-explorer-commands|
+8. Global functions 				|html-source-explorer-functions|
+11. License 					|html-source-explorer-license|
+
+==============================================================================
+						*html-source-explorer-intro*
+1. Overview~
+
+The "HTML Source Explorer" plugin is meant to aid on the html source exploring.
+It allows you to follow links by opening them on a new buffer on vim (the same
+way you can follow links on Mozilla Firefox/Chrome view source).
+
+By using <leader>fl inside "", '' or (), if it is a link (absolute, or
+relative) the file will be open. 
+
+It works both on http:// urls and local files.
+
+This plugin also includes a |:Wget| command which allows you to open a copy of
+a remote file for editing in vim
+
+==============================================================================
+						*html-source-explorer-requirements*
+3. Requirements~
+
+The html-source-explorer plugin requires the following:
+
+    * Vim version 6.0 and above
+    * wget (for http support)
+
+==============================================================================
+						*html-source-explorer-install*
+4. Installation~
+
+1. Download the html-source-explorer.zip file and unzip the files to the $HOME/.vim or the
+   $HOME/vimfiles or the $VIM/vimfiles directory. After this step, you should
+   have the following two files (the directory structure should be preserved):
+
+	plugin/html-source-explorer.vim - main html-source-explorer plugin file
+	doc/html-source-explorer.txt    - documentation (help) file
+
+   Refer to the |add-plugin| and |'runtimepath'| Vim help pages for more
+   details about installing Vim plugins.
+2. Change to the $HOME/.vim/doc or $HOME/vimfiles/doc or $VIM/vimfiles/doc
+   directory, start Vim and run the ":helptags ." command to process the
+   html-source-explorer help file. Without this step, you cannot jump to the html-source-explorer help
+   topics.
+3. You can use Pathogen to install this plugin
+
+To uninstall the html-source-explorer plugin, remove the plugin/html-source-explorer.vim and
+doc/html-source-explorer.txt files from the $HOME/.vim or $HOME/vimfiles directory.
+
+==============================================================================
+						*html-source-explorer-using*
+5. Usage~
+
+1. You can keep the html-source-explorer window open during the entire editing session. On
+   opening the html-source-explorer window, the tags defined in all the files in the Vim
+   buffer list will be displayed in the html-source-explorer window. As you edit files, the
+   tags defined in them will be added to the html-source-explorer window. You can select a
+   tag from the html-source-explorer window and jump to it. The current tag will be
+   highlighted in the html-source-explorer window. You can close the html-source-explorer window when
+   you no longer need the window.
+
+==============================================================================
+						*html-source-explorer-commands*
+7. Commands~
+
+The html-source-explorer plugin provides the following ex-mode commands:
+
+|:Wget|	Download a copy of a remote file (HTTP) and open it in a new buffer.
+|:Follow| Follow the link under the cursor and open it (or a copy when using
+HTTP) in a new buffer.
+
+						*:Wget*
+:Wget {file} 
+		Download a copy of a remote file (HTTP) using wget command (by default)
+		and opening it in a new buffer.
+
+		You can use Nread instead of wget by adding the following line
+		to your .vimrc file
+>
+		let g:se_http_handler = 'Nread' "default: wget
+<
+		Wget changes the |filetype| to the downloaded file extension
+		(if it has one). In case the URL doesn't have and extension
+		the default file  type bellow is used.
+>
+		let g:se_default_extension = 'html'
+<
+						*:Follow*
+:Follow 
+		Follows the file referenced under the cursor. A valid file name is an 
+		absolute URL starting with the http:// scheme, a relative url
+		(e.g.: ./file1.txt or ../file2.txt)
+		or a domain absolute url (e.g.: /file.txt)
+		The relative paths are resolved using the current buffer
+		location which can be local file, or an URL (when the current
+		buffer is the result of a |:Wget| or a previous |:Follow|
+		command
+
+==============================================================================
+						*html-source-explorer-functions*
+8. Global functions~
+
+The html-source-explorer plugin provides several global functions that can be used from
+other Vim plugins to interact with the html-source-explorer plugin. These functions are
+described below.
+function! g:FollowUrl(Url)
+
+|FollowUrl|		Opens a copy of a remote file (HTTP) or a local file.
+
+					    *FollowUrl()*
+FollowUrl({url})
+		Same behaviour as |:Follow| but receives the desired file path
+		as a parameter.
+
+
+==============================================================================
+						*html-source-explorer-license*
+11. License~
+Permission is hereby granted to use and distribute the html-source-explorer plugin, with or
+without modifications, provided that this copyright notice is copied with it.
+Like anything else that's free, html-source-explorer.vim is provided *as is* and comes with
+no warranty of any kind, either expressed or implied. In no event will the
+copyright holder be liable for any damamges resulting from the use of this
+software.
+
+==============================================================================
+
+vim:tw=78:ts=8:noet:ft=help:
